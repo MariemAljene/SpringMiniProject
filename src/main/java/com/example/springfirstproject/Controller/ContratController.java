@@ -4,8 +4,10 @@ import com.example.springfirstproject.AService.IContratService;
 import com.example.springfirstproject.entity.Contrat;
 import com.example.springfirstproject.entity.Etudiant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -42,4 +44,21 @@ public class ContratController {
     public void removeContrat(@PathVariable("etudiant-id") Integer etudiantId) {
         iContratService.removeContrat(etudiantId);
     }
+    @PutMapping("/affConET/{nomE}/{prenomE}")
+    public Contrat affectContratToEtudiant(@PathVariable int idContrat, @PathVariable("nomE") String nomE,@PathVariable("prenomE") String PrenomE){
+        return iContratService.affectContratToEtudiant(idContrat,nomE,PrenomE);
+    }
+    @GetMapping(value = "/getnbContratsValides/{startDate}/{endDate}")
+    public Integer getnbContratsValides(@PathVariable(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date startDate,
+                                        @PathVariable(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date endDate) {
+
+        return iContratService.nbContratsValides(startDate, endDate);
+    }
+    @GetMapping("/chiffreaffaire/{id}/{startDate}/{endDate}")
+    public float getchiffredaffaire(@PathVariable("IdUniv")int IdUniv,@PathVariable("startDate")Date startDate ,@PathVariable("endDate" )Date endDate){
+        return iContratService.getMantantContrat(IdUniv,startDate,endDate);
+    }
+
 }

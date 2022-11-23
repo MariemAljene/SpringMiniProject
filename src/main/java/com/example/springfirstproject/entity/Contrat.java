@@ -23,6 +23,8 @@ public class Contrat implements Serializable {
     private Date dateFinContrat;
     @Enumerated(EnumType.STRING)
     private Specialite specialite;
+
+    private  boolean Archive ;
     @ManyToOne
  Etudiant Etudiant;
 

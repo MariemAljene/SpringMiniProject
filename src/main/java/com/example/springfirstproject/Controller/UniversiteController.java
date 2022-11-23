@@ -2,6 +2,7 @@ package com.example.springfirstproject.Controller;
 
 import com.example.springfirstproject.AService.IEtudiantService;
 import com.example.springfirstproject.AService.IUniversiteService;
+import com.example.springfirstproject.entity.Contrat;
 import com.example.springfirstproject.entity.Etudiant;
 import com.example.springfirstproject.entity.Universite;
 import com.example.springfirstproject.repository.UniversiteRepository;
@@ -54,5 +55,9 @@ public class UniversiteController {
                                               @PathVariable("departementID")Integer departementID)
     {
         UniversiteService.assignUniversiteToDepartement(UniversiteID,departementID);
+    }
+    @PutMapping("/AfficherDepartementByUniversite/{id}")
+    public Universite affectContratToEtudiant(@PathVariable int id){
+        return (Universite) UniversiteService.retrieveDepartementsByUniversite(id);
     }
 }

@@ -7,6 +7,7 @@ import com.example.springfirstproject.entity.Universite;
 import com.example.springfirstproject.repository.DepartementRepository;
 import com.example.springfirstproject.repository.EtudiantRepository;
 import com.example.springfirstproject.repository.UniversiteRepository;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,14 @@ public class UniversiteServiceImp implements IUniversiteService {
         Departement d = departementRepository.findById(idDepartement).orElse(null);
         u.getDepartement().add(d);
         universiteRepository.save(u);
+    }
+
+    @Override
+    public List<Departement> retrieveDepartementsByUniversite(Integer idUniversite) {
+        Universite u =universiteRepository.findById(idUniversite).orElse(null)  ;
+       return (List<Departement>) u.getDepartement();
+
+
     }
 
 }

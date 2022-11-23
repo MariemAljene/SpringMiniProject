@@ -1,5 +1,6 @@
 package com.example.springfirstproject.AService;
 
+import com.example.springfirstproject.entity.Departement;
 import com.example.springfirstproject.entity.Universite;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface IUniversiteService {
     void removeUniversite(Integer idUniversite);
     void assignUniversiteToDepartement(Integer idUniversite, Integer
             idDepartement);
-
+    List<Departement> retrieveDepartementsByUniversite(Integer idUniversite);
 }

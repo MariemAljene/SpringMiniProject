@@ -29,6 +29,7 @@ public class Etudiant implements Serializable {
     @JsonIgnore
     @ManyToOne
    Departement departement;
+
     @ManyToMany (cascade = CascadeType.ALL)
     private  Set<Equipe> Equipe ;
 }
