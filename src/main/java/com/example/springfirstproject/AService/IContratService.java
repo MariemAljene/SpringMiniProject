@@ -1,6 +1,7 @@
 package com.example.springfirstproject.AService;
 
 import com.example.springfirstproject.entity.Contrat;
+import com.example.springfirstproject.entity.Etudiant;
 
 import java.util.Date;
 import java.util.List;
@@ -17,5 +18,6 @@ public interface IContratService {
     void removeContrat(Integer idContrat);
     Contrat affectContratToEtudiant (Integer idContrat,String nomE,String prenomE);
     Integer nbContratsValides(Date startDate, Date endDate);
-     float getMantantContrat(int id,Date startDate, Date endDate);
-}
+    float getMontantContartEntreDeuxDate(int idUniv,Date startDate, Date enddate);
+
+    }

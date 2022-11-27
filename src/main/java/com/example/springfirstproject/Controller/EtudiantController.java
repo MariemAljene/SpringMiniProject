@@ -66,5 +66,10 @@ public Etudiant AddEtudiant( @RequestBody  Etudiant e )
         EtudiantService.addAndAssignEtudiantToEquipeAndContract(e,idContrat,EquipeId);
     }
 
+    @GetMapping("/getEtudientSecurite")
+   public List<Etudiant> AfficherLesContratsDeLaSpecialiteSecurite()
+    {
 
+        return EtudiantService.AfficherLesContratsDeLaSpecialiteSecurite();
+    }
 }

@@ -75,5 +75,16 @@ public class EtudiantServiceImp implements IEtudiantService {
 
     }
 
+    @Override
+    public List<Etudiant> AfficherLesContratsDeLaSpecialiteSecurite() {
+        List<Contrat> contrats = (List<Contrat>) contratRepository.findBySpecialite();
+        List<Etudiant> etudiants =etudiantRepository.findAll();
+        for(Etudiant e: etudiants)
+        { if (contratRepository.findBySpecialite().equals("securtie"))
+            log.info("Etudiant"+e.toString());
+        }
+        return etudiants;
+    }
+
 
 }

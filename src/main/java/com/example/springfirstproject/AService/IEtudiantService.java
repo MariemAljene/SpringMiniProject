@@ -21,6 +21,7 @@ void assignEtudiantToDepartement (Integer etudiantId, Integer
                                                      Integer idEquipe);
 
 
+    List<Etudiant> AfficherLesContratsDeLaSpecialiteSecurite();
 
 
 }

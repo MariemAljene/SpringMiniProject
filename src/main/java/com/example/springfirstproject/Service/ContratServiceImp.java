@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 @Repository
 @Slf4j
-public class ContratServiceImp  implements IContratService {
+public class  ContratServiceImp  implements IContratService {
     @Autowired
     ContratRepository contrattRepository;
     EtudiantRepository etudiantRepository;
@@ -90,18 +90,40 @@ public class ContratServiceImp  implements IContratService {
         }
         return i;
     }
-    public float getMontantContartEntreDeuxDate(int idUniv,Date startDate, Date enddate)
-    {
-        List<Contrat> listContrat = new ArrayList<>();
-        float Montant=0;
-        Universite u=univrepo.findById(idUniv).orElse(null);
-        u.getDepartement().forEach(departement -> {departement.getEtudiant().forEach(
-                        etudiant -> etudiant.getContrats().forEach
-                                (contrat -> {listContrat.add(contrat);})
 
-                );
+    @Override
+    public float getMontantContartEntreDeuxDate(int idUniv, Date startDate, Date enddate) {
+
+        List<Contrat> contrats = contrattRepository.findAll();
+        long diff = enddate.getTime() - startDate.getTime();
+        double chiffreAffaire = 0;
+        //double resultat =0 ;
+        for (Contrat ct : contrats) {
+            if (ct.isArchive() == false) {
+                if ((ct.getDateDebutContrat().before(startDate)) && (ct.getDateFinContrat().after(enddate))) {
+
+                    double diffMois = diff / (1000 * 60 * 60 * 24 * 30);
+                    double resultat =0 ;
+                    switch (ct.getSpecialite()) {
+                        case IA:
+                            chiffreAffaire =+ diffMois * 300;
+                            break;
+                        case Reseaux:
+                            chiffreAffaire =+ diffMois * 350;
+                            break;
+                        case Cloud:
+                            chiffreAffaire =+ diffMois * 400;
+                            break;
+                        case Securite:
+                            chiffreAffaire =+ diffMois * 450;
+                            break;
+                    }
+                    return (float) chiffreAffaire;
                 }
-        );
-        List<Contrat> contrats=contrattRepository;
-
+            }
+        }
+        return (float) chiffreAffaire;
     }
+
+
+}

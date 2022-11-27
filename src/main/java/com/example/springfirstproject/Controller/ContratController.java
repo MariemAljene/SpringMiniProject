@@ -58,7 +58,8 @@ public class ContratController {
     }
     @GetMapping("/chiffreaffaire/{id}/{startDate}/{endDate}")
     public float getchiffredaffaire(@PathVariable("IdUniv")int IdUniv,@PathVariable("startDate")Date startDate ,@PathVariable("endDate" )Date endDate){
-        return iContratService.getMantantContrat(IdUniv,startDate,endDate);
+        return iContratService.getMontantContartEntreDeuxDate(IdUniv,startDate,endDate);
     }
+
 
 }
