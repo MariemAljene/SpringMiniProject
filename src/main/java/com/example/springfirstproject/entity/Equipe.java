@@ -34,4 +34,5 @@ public class Equipe implements Serializable {
     private Set<Etudiant> Etudiant ;
 
 
+
 }

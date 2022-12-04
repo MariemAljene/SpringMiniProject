@@ -13,5 +13,6 @@ public interface IEquipeService {
 
     Equipe retrieveEquipe (Integer idEquipe);
     void removeDepartement(Integer idDepartement);
+    void faireEvoluerEquipes();
 
 }

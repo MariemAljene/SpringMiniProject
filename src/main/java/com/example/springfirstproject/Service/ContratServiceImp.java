@@ -9,12 +9,19 @@ import com.example.springfirstproject.repository.ContratRepository;
 import com.example.springfirstproject.repository.EtudiantRepository;
 import com.example.springfirstproject.repository.UniversiteRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @Repository
 @Slf4j
 public class  ContratServiceImp  implements IContratService {
@@ -125,5 +132,21 @@ public class  ContratServiceImp  implements IContratService {
         return (float) chiffreAffaire;
     }
 
+    @Override
+    @Scheduled(cron = "0 0 1 ? * *")
+    public void retrieveAndUpdateStatusContrat() {
+        List<Contrat> C = retrieveAllContrats();
+        LocalDate localDate = LocalDate.now();
+        for (int d = 0; d < C.size(); d++) {
+            Contrat S = C.get(d);
+            long diff = localDate.getDayOfMonth() - S.getDateFinContrat().getTime();
+            long diffs = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            if (diffs <= 0) {
+                S.setArchive(true);
+                contrattRepository.save(S);
 
-}
+            }
+        }
+
+
+    }}
